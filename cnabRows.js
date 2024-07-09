@@ -1,22 +1,15 @@
 'use strict';
 
-import path from 'path'
-import { readFile } from 'fs/promises'
-import { fileURLToPath } from 'url'
 import Logger from './logger.js'
 import CnabFileManager from './cnabFileManager.js'
 import YargsAdapter from './yargsAdapter.js';
-
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const file = path.resolve(`${__dirname}/cnabExample.rem`)
+import FileConfigurer from './fileConfigurer.js';
 
 const { from, to, segmento } = YargsAdapter.getOptions()
 
 console.time('leitura Async')
 
-readFile(file, 'utf8')
+new FileConfigurer().readFile()
   .then(file => {
     const cnabFileManager = new CnabFileManager(file)
 
