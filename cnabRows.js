@@ -4,9 +4,9 @@ import path from 'path'
 import { readFile } from 'fs/promises'
 import { fileURLToPath } from 'url'
 import Logger from './logger.js'
+import CnabFileManager from './cnabFileManager.js'
 
 import yargs from 'yargs'
-import chalk from 'chalk'
 
 const optionsYargs = yargs(process.argv.slice(2))
   .usage('Uso: $0 [options]')
@@ -22,36 +22,26 @@ const file = path.resolve(`${__dirname}/cnabExample.rem`)
 
 const { from, to, segmento } = optionsYargs
 
-const sliceArrayPosition = (arr, ...positions) => [...arr].slice(...positions)
-
-const log = console.log
-
 console.time('leitura Async')
 
 readFile(file, 'utf8')
   .then(file => {
-    const cnabArray = file.split('\n')
-
-    const cnabHeader = sliceArrayPosition(cnabArray, 0, 2)
-
-    const [cnabBodySegmentoP, cnabBodySegmentoQ, cnabBodySegmentoR] = sliceArrayPosition(cnabArray, 2, -2)
-
-    const cnabTail = sliceArrayPosition(cnabArray, -2)
+    const cnabFileManager = new CnabFileManager(file)
 
     if (segmento === 'p') {
-      const logger = new Logger(cnabBodySegmentoP, segmento, from, to)
+      const logger = new Logger(cnabFileManager.cnabBodySegmentoP, segmento, from, to)
       logger.log()
       return
     }
 
     if (segmento === 'q') {
-      const logger = new Logger(cnabBodySegmentoQ, segmento, from, to)
+      const logger = new Logger(cnabFileManager.cnabBodySegmentoQ, segmento, from, to)
       logger.log()
       return
     }
 
     if (segmento === 'r') {
-      const logger = new Logger(cnabBodySegmentoR, segmento, from, to)
+      const logger = new Logger(cnabFileManager.cnabBodySegmentoR, segmento, from, to)
       logger.log()
       return
     }
