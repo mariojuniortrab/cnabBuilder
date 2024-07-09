@@ -1,7 +1,9 @@
 'use strict';
+
 import path from 'path'
 import { readFile } from 'fs/promises'
-import { fileURLToPath } from 'url';
+import { fileURLToPath } from 'url'
+import Logger from './logger.js'
 
 import yargs from 'yargs'
 import chalk from 'chalk'
@@ -22,21 +24,6 @@ const { from, to, segmento } = optionsYargs
 
 const sliceArrayPosition = (arr, ...positions) => [...arr].slice(...positions)
 
-const messageLog = (segmento, segmentoType, from, to) => `
------ Cnab linha ${segmentoType} -----
-
-posição from: ${chalk.inverse.bgBlack(from)}
-
-posição to: ${chalk.inverse.bgBlack(to)}
-
-item isolado: ${chalk.inverse.bgBlack(segmento.substring(from - 1, to))}
-
-item dentro da linha P: 
-  ${segmento.substring(0, from)}${chalk.inverse.bgBlack(segmento.substring(from - 1, to))}${segmento.substring(to)}
-
------ FIM ------
-`
-
 const log = console.log
 
 console.time('leitura Async')
@@ -52,17 +39,20 @@ readFile(file, 'utf8')
     const cnabTail = sliceArrayPosition(cnabArray, -2)
 
     if (segmento === 'p') {
-      log(messageLog(cnabBodySegmentoP, 'P', from, to))
+      const logger = new Logger(cnabBodySegmentoP, segmento, from, to)
+      logger.log()
       return
     }
 
     if (segmento === 'q') {
-      log(messageLog(cnabBodySegmentoQ, 'Q', from, to))
+      const logger = new Logger(cnabBodySegmentoQ, segmento, from, to)
+      logger.log()
       return
     }
 
     if (segmento === 'r') {
-      log(messageLog(cnabBodySegmentoR, 'R', from, to))
+      const logger = new Logger(cnabBodySegmentoR, segmento, from, to)
+      logger.log()
       return
     }
 
