@@ -9,7 +9,7 @@ const handleError = error => {
       console.error(`Error: 🚀 ~ informed path is not a file`)
       break
     default:
-      console.error(`Error: 🚀 ~ file: ${error.path} not found`)
+      console.error(`Error: 🚀 ~  ${error}`)
   }
 
   process.exit(1)

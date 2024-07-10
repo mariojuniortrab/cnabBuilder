@@ -16,7 +16,7 @@ export default class Logger {
     this.#to = to
   }
 
-  log = () => log(this.#buildMessage())
+  log = () => this.#buildMessage()
 
   #buildMessage = () => `
   ----- ${this.#buildTitle()} -----
