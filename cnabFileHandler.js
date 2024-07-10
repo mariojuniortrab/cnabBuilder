@@ -1,5 +1,6 @@
 import Logger from './logger.js'
 import CnabFileManager from './cnabFileManager.js'
+import JsonExporter from './jsonExporter.js'
 
 const handleCnabFile = async (yargs) => {
   return async file => {
@@ -23,7 +24,7 @@ const handleCnabFile = async (yargs) => {
     await Logger.log(searchResponses)
 
     if (exportJson) {
-      console.log("exportar json")
+      await JsonExporter.saveJsonFile(searchResponses)
     }
 
   }
