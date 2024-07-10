@@ -1,6 +1,6 @@
-import Logger from './logger.js'
+import Logger from '../presentation/logger.js'
 import CnabFileManager from './cnabFileManager.js'
-import JsonExporter from './jsonExporter.js'
+import JsonExporter from '../presentation/jsonExporter.js'
 
 const handleCnabFile = async (yargs) => {
   return async file => {

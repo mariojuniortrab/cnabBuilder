@@ -1,16 +1,44 @@
 [
   {
-    "company": "NTT BRASIL COMERCIO E SERVICOS DE MARIO",
+    "company": "ARAUCO DO BRASIL SA",
     "address": {
-      "logradouro": "AVENIDA DOUTOR CHUCRI ZAIDAN, 1240 ANDAR",
-      "bairro": "VILA SAO FRANCI",
-      "cep": "04711130",
-      "cidade": "SAO PAULO",
-      "uf": "SP"
+      "logradouro": "AV IGUACU, 2820",
+      "bairro": "AGUA VERDE",
+      "cep": "80240031",
+      "cidade": "CURITIBA",
+      "uf": "PR"
     },
     "pos": {
       "from": 34,
-      "to": 73
+      "to": 53
+    }
+  },
+  {
+    "company": "ARAUCO DO BRASIL SA",
+    "address": {
+      "logradouro": "AV IGUACU, 2820",
+      "bairro": "AGUA VERDE",
+      "cep": "80240031",
+      "cidade": "CURITIBA",
+      "uf": "PR"
+    },
+    "pos": {
+      "from": 34,
+      "to": 53
+    }
+  },
+  {
+    "company": "ELECTROLUX DO BRASIL SA",
+    "address": {
+      "logradouro": "RUA MIN GABRIEL PASSOS, 360",
+      "bairro": "GUABIROTUBA",
+      "cep": "81520900",
+      "cidade": "CURITIBA",
+      "uf": "PR"
+    },
+    "pos": {
+      "from": 34,
+      "to": 57
     }
   }
 ]

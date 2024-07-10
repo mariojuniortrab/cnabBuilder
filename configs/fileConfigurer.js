@@ -12,9 +12,11 @@ export default class FileConfigurer {
       return
     }
 
+    console.log("Obtendo dados do arquivo padrão: cnabExample.rem")
+
     const __filename = fileURLToPath(import.meta.url);
     const __dirname = path.dirname(__filename);
-    this.#path = path.resolve(`${__dirname}/cnabExample.rem`)
+    this.#path = path.resolve(`${__dirname}/../cnabExample.rem`)
   }
 
   readFile = () => readFile(this.#path, this.#encode)
