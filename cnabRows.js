@@ -5,11 +5,11 @@ import FileConfigurer from './fileConfigurer.js'
 import handleCnabFile from './cnabFileHandler.js'
 import handleError from './errorHandler.js'
 
-const { from, to, segmento } = YargsAdapter.getOptions()
+const { from, to, segmento, path } = YargsAdapter.getOptions()
 
 console.time('leitura Async')
 
-new FileConfigurer()
+new FileConfigurer(path)
   .readFile()
   .then(handleCnabFile(from, to, segmento))
   .catch(handleError)
