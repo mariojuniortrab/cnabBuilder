@@ -1,45 +1,61 @@
 import chalk from 'chalk'
+import readline from 'readline'
 
 const log = console.log
 
 export default class Logger {
 
-  #segment
-  #segmentType
-  #from
-  #to
-
-  constructor(segment, segmentType, from, to) {
-    this.#segment = segment
-    this.#segmentType = segmentType.toUpperCase()
-    this.#from = from
-    this.#to = to
+  static log = async (searchResponses) => {
+    if (searchResponses.length) {
+      for (const row in searchResponses) {
+        log(this.#buildMessage(searchResponses[row]))
+        await waitForEnter(row, searchResponses.length)
+      }
+    }
   }
 
-  log = () => this.#buildMessage()
-
-  #buildMessage = () => `
-  ----- ${this.#buildTitle()} -----
+  static #buildMessage = (searchResponse) => {
+    const { row, segmentType, from, to, value, segment } = searchResponse
+    return `
+  ----- ${this.#buildTitle(row, segmentType)} -----
   
-  ${this.#buildFrom()}
+  ${this.#buildFrom(from)}
   
-  ${this.#buildTo()}
+  ${this.#buildTo(to)}
   
-  ${this.#buildIsolated()}
+  ${this.#buildIsolated(value)}
   
-  ${this.#buildItemInsideFile()}
+  ${this.#buildItemInsideFile(segmentType, segment, from, to)}
   
   ----- FIM ------
-  `
+  `}
 
-  #buildTitle = () => `Cnab linha ${this.#segmentType}`
+  static #buildTitle = (row, segmentType) => `Cnab linha ${row} tipo: ${segmentType}`
 
-  #buildFrom = () => `posição from:  ${chalk.inverse.bgBlack(this.#from)}`
+  static #buildFrom = (from) => `posição from:  ${inverseBg(from)}`
 
-  #buildTo = () => `posição to: ${chalk.inverse.bgBlack(this.#to)}`
+  static #buildTo = (to) => `posição to: ${inverseBg(to)}`
 
-  #buildIsolated = () => `item isolado: ${chalk.inverse.bgBlack(this.#segment.substring(this.#from - 1, this.#to))}`
+  static #buildIsolated = (value) => `item isolado: ${inverseBg(value)}`
 
-  #buildItemInsideFile = () => `item dentro da linha ${this.#segmentType}: 
-    ${this.#segment.substring(0, this.#from)}${chalk.inverse.bgBlack(this.#segment.substring(this.#from - 1, this.#to))}${this.#segment.substring(this.#to)}`
+  static #buildItemInsideFile = (segmentType, segment, from, to) => `item dentro da linha ${segmentType}: 
+    ${segment.substring(0, from - 1)}${inverseBg(segment.substring(from - 1, to - 1))}${segment.substring(to - 1)}`
+}
+
+const inverseBg = chalk.inverse.bgBlack
+
+const waitForEnter = (item, total) => {
+  return new Promise((resolve) => {
+    const rl = readline.createInterface({
+      input: process.stdin,
+      output: process.stdout
+    });
+
+    console.log(`Item: ${inverseBg(Number(item) + 1)}/${inverseBg(total)} -  ${inverseBg('Enter/Return')} = Próximo`);
+
+    rl.on('line', () => {
+      rl.close();
+      resolve();
+    });
+  });
 }

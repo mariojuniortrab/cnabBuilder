@@ -1,26 +1,26 @@
 import Logger from './logger.js'
 import CnabFileManager from './cnabFileManager.js'
 
-const handleCnabFile = (yargs) => {
-  return file => {
+const handleCnabFile = async (yargs) => {
+  return async file => {
     const { search, value, exportJson } = yargs
     const cnabFileManager = new CnabFileManager(file)
 
-    let searchResults
+    let searchResponses
 
     if (search === 'empresa') {
-      searchResults = cnabFileManager.searchForCompany(value)
+      searchResponses = cnabFileManager.searchForCompany(value)
     }
 
     if (search === 'segmento') {
-      searchResults = cnabFileManager.searchForSegment(value)
+      searchResponses = cnabFileManager.searchForSegment(value)
     }
 
-    if (searchResults.length == 0) {
+    if (searchResponses.length == 0) {
       throw new Error("Segmento não encontrado")
     }
 
-    console.log(searchResults)
+    await Logger.log(searchResponses)
 
     if (exportJson) {
       console.log("exportar json")
