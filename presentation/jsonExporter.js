@@ -24,7 +24,8 @@ export default class JsonExporter {
       const address = searchResponse.address
       const pos = {
         from: searchResponse.from,
-        to: searchResponse.to
+        to: searchResponse.to,
+        row: searchResponse.row
       }
 
       exportObjectArray.push({ company, address, pos })

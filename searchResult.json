@@ -9,8 +9,9 @@
       "uf": "PR"
     },
     "pos": {
-      "from": 34,
-      "to": 53
+      "from": 77,
+      "to": 83,
+      "row": 31
     }
   },
   {
@@ -23,22 +24,9 @@
       "uf": "PR"
     },
     "pos": {
-      "from": 34,
-      "to": 53
-    }
-  },
-  {
-    "company": "ELECTROLUX DO BRASIL SA",
-    "address": {
-      "logradouro": "RUA MIN GABRIEL PASSOS, 360",
-      "bairro": "GUABIROTUBA",
-      "cep": "81520900",
-      "cidade": "CURITIBA",
-      "uf": "PR"
-    },
-    "pos": {
-      "from": 34,
-      "to": 57
+      "from": 77,
+      "to": 83,
+      "row": 34
     }
   }
 ]
