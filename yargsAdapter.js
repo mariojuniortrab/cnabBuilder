@@ -14,7 +14,11 @@ export default class YargsAdapter {
       .option("path", { alias: "p", describe: "Caminho do arquivo", type: "string" })
       .option("exportJson", { alias: "e", describe: "Exportar para JSON", type: "boolean" })
 
-      .example('$0 -f 21 -t 34 -s p', 'lista a linha e campo que from e to do cnab')
+      .example([
+        ['$0 -s empresa -v DO BRASIL -e  ', 'lista as linhas onde as empresas possuem "DO BRASIL" em seu nome'],
+        ['$0 -s segmento -v 70000172 -e ', 'lista as linhas que possuem o valor "70000172" em seu conteudo'],
+        ['$0 -s empresa -v mario -e -p /Users/mariojunior/Documents/backup/cnabExample.rem   ', 'lista as linhas onde as empresas possuem "MARIO" em seu nome no arquivo especificado'],
+      ])
       .locale('pt_BR')
       .argv
 

@@ -21,7 +21,7 @@ export default class CnabFileManager {
     const cnabContent = this.#sliceArrayPosition(cnabArray, 2, -2)
 
     if (cnabContent.length % 3 !== 0) {
-      throw new Error("Arquivo inválido")
+      throw new Error("Arquivo inválido. A quantidade de segmentos Q, P e R precisa ser a mesma!")
     }
 
     for (let i = 0; i < cnabContent.length; i = i + 3) {
